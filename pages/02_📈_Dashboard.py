@@ -3,6 +3,7 @@ import pandas as pd
 import numpy as np
 
 
+st.title('Dashboard')
 
 chart_data = pd.DataFrame(
     np.random.randn(20, 3),
@@ -11,4 +12,3 @@ chart_data = pd.DataFrame(
 
 st.bar_chart(chart_data)
 st.line_chart(chart_data)
-st.title('Dashboard')
