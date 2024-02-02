@@ -1,12 +1,10 @@
 import streamlit as st
 import pandas as pd
 import streamlit_authenticator as stauth
-
-
-# hashed_pwd = stauth.hasher()
-
 import yaml
 from yaml.loader import SafeLoader
+
+# hashed_pwd = stauth.hasher()
 
 st.set_page_config(
     page_title='About',

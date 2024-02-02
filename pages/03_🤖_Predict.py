@@ -99,14 +99,15 @@ if __name__ == '__main__':
             st.selectbox('Select your department', options=['Sales', 'Research & Development', 'Human Resources'], key='department')
             st.number_input('Enter the number of education years', key='education', min_value=1, step=1)
             st.selectbox('Enter what field of Education you have', options=['Life Sciences', 'Other', 'Medical', 'Marketing','Technical Degree','Human Resources'], key='education_field')
-            st.number_input('How many years have you worked in this company', key='years_at_company', min_value=1, step=1)
+            st.number_input('How many companies have you worked for', max_value=20, step=1, key='number_of_companies_worked')
+           
 
         with col3:
             st.write('### Satifaction Index 😍')
             st.number_input('Rate your satisfaction with the environement', max_value=5, step=1, key='environment_satisfaction')
             st.number_input('Rate your job satisfaction', max_value=5, step=1, key='job_satisfaction')
             st.number_input('Rate your work-life balance', max_value=5, step=1, key='work_life_balance')
-            st.number_input('How many companies have you worked for', max_value=20, step=1, key='number_of_companies_worked')
+            st.number_input('How many years have you worked in this company', key='years_at_company', min_value=1, step=1)
             
         #Add a submit button to perform the prediction
         st.form_submit_button('## **Predict**', type='primary', use_container_width=False, on_click=predict_attrition, kwargs=dict(pipeline=pipeline, encoder=encoder))
@@ -117,7 +118,7 @@ if __name__ == '__main__':
 final_prediction = st.session_state["prediction"]
 
 if not final_prediction:
-    st.write("### Predictions show here ➡️ ")
+    st.write("### Predictions show here ⬇️")
     st.divider()
 elif final_prediction == "Yes":
     st.markdown("### Prediction → Employee will leave the company")

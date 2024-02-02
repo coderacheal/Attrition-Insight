@@ -3,21 +3,21 @@ feature_descriptions = """
 The following describes the columns present in the data.
 
 ##### **Gender** 
-*Whether the customer is a male or a female*
+Whether the customer is a male or a female*
 
-#### **SeniorCitizen** -- *Whether a customer is a senior citizen or not*
+##### **SeniorCitizen** -- *Whether a customer is a senior citizen or not*
 
-#### **Partner** -- *Whether the customer has a partner or not (Yes, No)*
+##### **Partner** -- *Whether the customer has a partner or not (Yes, No)*
 
-#### **Dependents** -- *Whether the customer has dependents or not (Yes, No)*
+##### **Dependents** -- *Whether the customer has dependents or not (Yes, No)*
 
-#### **Tenure** -- *Number of months the customer has stayed with the company*
+##### **Tenure** -- *Number of months the customer has stayed with the company*
 
-#### **Phone Service** -- *Whether the customer has a phone service or not (Yes, No)*
+##### **Phone Service** -- *Whether the customer has a phone service or not (Yes, No)*
 
-#### **MultipleLines** -- *Whether the customer has multiple lines or not*
+##### **MultipleLines** -- *Whether the customer has multiple lines or not*
 
-#### **InternetService** -- *Customer's internet service provider (DSL, Fiber Optic, No)*
+##### **InternetService** -- *Customer's internet service provider (DSL, Fiber Optic, No)*
 
 #### **OnlineSecurity** -- *Whether the customer has online security or not (Yes, No, No Internet)*
 
