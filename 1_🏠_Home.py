@@ -1,14 +1,40 @@
 import streamlit as st
 import pandas as pd
+import streamlit_authenticator as stauth
 
-import numpy as np
 
+# hashed_pwd = stauth.hasher()
+
+import yaml
+from yaml.loader import SafeLoader
 
 st.set_page_config(
-    page_title='Attrition',
-    layout='wide',
+    page_title='About',
+    layout='centered',
     page_icon='🏠'
 )
+
+
+with open('./config.yaml') as file:
+    config = yaml.load(file, Loader=SafeLoader)
+
+authenticator = stauth.Authenticate(
+    config['credentials'],
+    config['cookie']['name'],
+    config['cookie']['key'],
+    config['cookie']['expiry_days'],
+    config['preauthorized']
+)
+
+authenticator.login()
+# authenticator.register()
+
+
+# with st.form('login-key'):
+#     st.write('### **Log In**')
+#     st.text_input('Enter your email')
+#     st.text_input('Enter your password', type='password')
+#     st.form_submit_button('Log In')
 
 col1, col2 = st.columns(2)
 
@@ -46,3 +72,6 @@ with col2:
     )
     st.link_button('GitHub', url='https://github.com/coderacheal')
     st.link_button('Medium', url='https://medium.com/coderacheal')
+
+
+# st.write(st.session_state())

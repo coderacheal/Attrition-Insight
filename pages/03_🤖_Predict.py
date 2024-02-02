@@ -6,24 +6,38 @@ import pandas as pd
 
 # Set page configurations
 st.set_page_config(
-    page_title='Predict Attrition',
+    page_title='Prediction',
     layout='wide',
 )
 
+#Choose model
+def select_model():
+
+    col1, col2 = st.columns(2)
+    
+    with col1:
+        st.selectbox('Select Model Type', options=['Random Forest Classifier', 'Decision Tree Classifier'], key='selected_model', placeholder="Select Model",)
+    with col2:
+        pass
+
+
+# Initialise prediction in the session state
+if "prediction" not in st.session_state:
+    st.session_state['prediction'] = None
 
 
 #Initialise model
 @st.cache_resource(show_spinner='Model Loading...')
 def load_model():
+
     #Load model and encoder
     pipeline = joblib.load('models/finished_model.joblib')
     encoder  = joblib.load('models/encoder.joblib')
 
-    return pipeline
+    return pipeline, encoder
 
 
-def predict_attrition(pipeline):
-
+def predict_attrition(pipeline, encoder):
     age = st.session_state['age']
     marital_status = st.session_state['marital_status']
     distance_from_home = st.session_state['distance_from_home']
@@ -43,55 +57,73 @@ def predict_attrition(pipeline):
     # Create a DataFrame with feature values
     data = [[age, department, distance_from_home, education, education_field, environment_satisfaction, job_satisfaction, marital_status, monthly_income, number_of_companies_worked, work_life_balance, years_at_company]]
 
+    # create the datafram with the values and column names
     df = pd.DataFrame(data, columns=columns)
 
+    #Make a prediction
     pred = pipeline.predict(df)
-    pred = pred[0]
+    pred = int(pred[0])
 
-    st.session_state['pred'] = pred
+    #Decode the prediction
+    prediction = encoder.inverse_transform([pred])
+
+    #Store the value in the session state
+    st.session_state['prediction'] = prediction
 
 
 
 if __name__ == '__main__':
     st.title('Predict Attrition')
 
+    #Call model selection function
+    select_model()
+
     #Create a form to get all input features
     with st.form('form key'):
 
-        pipeline = load_model()
+        #Load model and encoder
+        pipeline, encoder = load_model()
 
+        #Divide form into 3 columns
         col1, col2, col3 = st.columns(3)
 
         with col1:
-            st.write('### Personal Info')
-            age = st.number_input('Enter your age', key='age', max_value=60, step=1)
+            st.write('### Personal Info 👩🏿')
+            st.number_input('Enter your age', key='age', max_value=60, step=1)
             marital_status = st.selectbox('Select your marital status', options=['Single', 'Married', 'Divorced'], key='marital_status')
-            distance_from_home = st.number_input('What is you distance from home', key='distance_from_home', max_value=25)
-            monthly_income = st.number_input('Enter your salary per year', key='monthly_income', min_value=10000, step=1000)
+            st.number_input('What is you distance from home', key='distance_from_home', max_value=25)
+            st.number_input('Enter your salary per year', key='monthly_income', min_value=10000, step=1000)
 
         with col2:
-            st.write('### Work Info')
-            department = st.selectbox('Select your department', options=['Sales', 'Research & Development', 'Human Resources'], key='department')
-            education = st.number_input('Enter the number of education years', key='education', min_value=1, step=1)
-            education_field = st.selectbox('Enter what field of Education you have', options=['Life Sciences', 'Other', 'Medical', 'Marketing','Technical Degree','Human Resources'], key='education_field')
-            years_at_company = st.number_input('How many years have you worked in this company', key='years_at_company', min_value=1, step=1)
+            st.write('### Work Info 💼')
+            st.selectbox('Select your department', options=['Sales', 'Research & Development', 'Human Resources'], key='department')
+            st.number_input('Enter the number of education years', key='education', min_value=1, step=1)
+            st.selectbox('Enter what field of Education you have', options=['Life Sciences', 'Other', 'Medical', 'Marketing','Technical Degree','Human Resources'], key='education_field')
+            st.number_input('How many years have you worked in this company', key='years_at_company', min_value=1, step=1)
 
         with col3:
-            st.write('### Satifaction Index')
-            environment_satisfaction = st.slider('Rate your satisfaction with the environement', max_value=5, step=1, key='environment_satisfaction')
-            job_satisfaction = st.slider('Rate your job satisfaction', max_value=5, step=1, key='job_satisfaction')
-            work_life_balance = st.slider('Rate your work-life balance', max_value=5, step=1, key='work_life_balance')
-            number_of_companies_worked = st.slider('How many companies have you worked for', max_value=20, step=1, key='number_of_companies_worked')
-
+            st.write('### Satifaction Index 😍')
+            st.number_input('Rate your satisfaction with the environement', max_value=5, step=1, key='environment_satisfaction')
+            st.number_input('Rate your job satisfaction', max_value=5, step=1, key='job_satisfaction')
+            st.number_input('Rate your work-life balance', max_value=5, step=1, key='work_life_balance')
+            st.number_input('How many companies have you worked for', max_value=20, step=1, key='number_of_companies_worked')
             
-        #Add a submit button
-        st.form_submit_button('### **Submit**', type='primary', use_container_width=True, on_click=predict_attrition, kwargs=dict(pipeline=pipeline))
+        #Add a submit button to perform the prediction
+        st.form_submit_button('## **Predict**', type='primary', use_container_width=False, on_click=predict_attrition, kwargs=dict(pipeline=pipeline, encoder=encoder))
 
 
-if "pred" not in st.session_state:
-    st.session_state['pred'] = None
-# elif 
 
-# if ''
 
-st.write(st.session_state)
+final_prediction = st.session_state["prediction"]
+
+if not final_prediction:
+    st.write("### Predictions show here ➡️ ")
+    st.divider()
+elif final_prediction == "Yes":
+    st.markdown("### Prediction → Employee will leave the company")
+    st.divider()
+else:
+    st.markdown("### **Prediction** → Employee will not leave the company")
+    st.divider()
+
+# st.write(st.session_state)
