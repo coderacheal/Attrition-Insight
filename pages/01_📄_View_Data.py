@@ -66,7 +66,7 @@ def select_num_features():
 
 # Check if the user is authenticated
 if not st.session_state.get("authentication_status"):
-    st.warning('### Login to the app from the Home page to use')
+    st.warning('### Login from the Home page to use app')
 else:
     
     #set page title

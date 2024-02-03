@@ -6,9 +6,14 @@ from yaml.loader import SafeLoader
 from utils import column_1, column_2
 
 
+layout = 'centered'
+
+if st.session_state["authentication_status"]:
+    layout='wide'
+
 st.set_page_config(
     page_title='About',
-    layout='wide',
+    layout=layout,
     page_icon='🏠'
 )
 
@@ -24,7 +29,7 @@ authenticator = stauth.Authenticate(
     config['preauthorized']
 )
 
-name, authentication_status, username = authenticator.login(location='sidebar')
+name, authentication_status, username = authenticator.login(location='main')
 
 if st.session_state["authentication_status"]:
     authenticator.logout(location='sidebar', key='logout-button')
@@ -34,8 +39,9 @@ if st.session_state["authentication_status"]:
         column_1
     with col2:
         column_2
+        st.link_button('GitHub', url='https://github.com/coderacheal', type='primary')
+        st.link_button('Medium', url='https://medium.com/coderacheal', type='primary')
 elif st.session_state["authentication_status"] is False:
     st.error('Username/password is incorrect')
 elif st.session_state["authentication_status"] is None:
-    st.warning('## Login to use Attrition Metre')
-
+    st.warning('Enter username and password to use the app')

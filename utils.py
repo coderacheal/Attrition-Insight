@@ -47,7 +47,7 @@ The following describes the columns present in the data.
 
 
 column_1 = f"""
-    # Attrition Meter
+    ## Attrition Meter
     This app show where or not an employee will leave the company not based on certain determined demographics and job related questions
     ## Key Features
     - Dashboard - Contains Data Visualization
@@ -67,12 +67,9 @@ column_2 = """
     ## Advanced Features
     - Customization options for model parameters.
     - Real-time predictions for up-to-the-minute insights.
-    ## About
-    Attrition Meter is developed by a passionate team of data scientists and engineers dedicated to simplifying data analysis and machine learning.
     ## Need Help?
-    Contact us at  hello@rachealappiahkubi.com
+    Contact me at  hello@rachealappiahkubi.com for collaborations
     © 2024. All rights reserved.
+    ## Socials
     """
 
-# st.link_button('GitHub', url='https://github.com/coderacheal')
-# st.link_button('Medium', url='https://medium.com/coderacheal')
