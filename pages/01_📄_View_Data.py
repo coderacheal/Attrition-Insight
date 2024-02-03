@@ -10,13 +10,9 @@ st.set_page_config(
     page_icon='📄'
 )
 
-#set page title
-st.title('Proprietory Data & Features 🗃️')
-st.write('')
-
 
 # Initialize connection and use st.cache_resource to only run once.
-@st.cache_resource(show_spinner='Connecting to Database...')
+@st.cache_resource(show_spinner='Connecting to Database 🗃️...')
 def init_connection():
     return pyodbc.connect(
         "DRIVER={SQL Server};SERVER="
@@ -44,8 +40,10 @@ def running_query(query):
         return df
 
 
-query = running_query(f"SELECT * FROM LP2_Telco_churn_first_3000")
-st.dataframe(query)
+@st.cache_data()
+def select_all_features():
+    query = running_query("SELECT * FROM LP2_Telco_churn_first_3000")
+    return query
 
 
 @st.cache_data()
@@ -66,23 +64,34 @@ def select_num_features():
     return num_query
 
 
-st.markdown('# More Information on Features and Select Columns')
-# st.divider()
-col1, col2 = st.columns(2)
-with col1:
-    with st.expander(" ##### **Expand to learn about features**"):
-        st.markdown(feature_descriptions)
-with col2:
-    st.selectbox('Select Specific Features', options=['No column selected', 'View numeric columns', 'View categorical columns'], key='selected_columns')
-
-
-if st.session_state['selected_columns'] == 'View categorical columns':
-    st.write('### Showing results for Categorical Columns...')
-    cat_results = select_cat_features()
-    st.dataframe(cat_results)
-elif st.session_state['selected_columns'] == 'View numeric columns':
-    st.write('### Showing results for Numeric Columns...')
-    num_results = select_num_features()
-    st.dataframe(num_results)
+# Check if the user is authenticated
+if not st.session_state.get("authentication_status"):
+    st.warning('### Login to the app from the Home page to use')
 else:
-    pass
+    
+    #set page title
+    st.title('Proprietory Data from IMB 🛢️')
+    st.write('')
+
+
+    # Additional Code for the Second Page
+    col1, col2 = st.columns(2)
+    with col1:
+        pass
+    with col2:
+        st.selectbox('Select Specific Features', options=['All Columns','View numeric columns', 'View categorical columns', 'No column selected'], key='selected_columns')
+
+    if st.session_state['selected_columns'] == 'All Columns':
+        all_results = select_all_features()
+        st.dataframe(all_results)
+    elif st.session_state['selected_columns'] == 'View categorical columns':
+        cat_results = select_cat_features()
+        st.dataframe(cat_results)
+    elif st.session_state['selected_columns'] == 'View numeric columns':
+        num_results = select_num_features()
+        st.dataframe(num_results)
+    else:
+        pass
+
+    with st.expander(" #### **Expand to learn about features**"):
+        st.markdown(feature_descriptions)

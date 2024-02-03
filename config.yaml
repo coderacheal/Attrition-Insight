@@ -1,19 +1,14 @@
-credentials:
-  usernames:
-    jsmith:
-      email: jsmith@gmail.com
-      logged_in: False # Will be managed automatically
-      name: John Smith
-      password: abc # Will be hashed automatically
-    rbriggs:
-      email: rbriggs@gmail.com
-      logged_in: False # Will be managed automatically
-      name: Rebecca Briggs
-      password: def # Will be hashed automatically
 cookie:
   expiry_days: 30
   key: cookie_signature_key # Must be string
   name: cookie_name
+credentials:
+  usernames:
+    coderacheal:
+      email: coderacheal@gmail.com
+      logged_in: False # Will be managed automatically
+      name: Racheal Appiah-kubi
+      password: abc # Will be hashed automatically
 preauthorized:
   emails:
-  - coderacheal@gmail.com
+  - racheal.appiahkubi@azubiafrica.org
