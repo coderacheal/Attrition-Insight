@@ -12,9 +12,8 @@ st.set_page_config(
 
 #Choose model
 def select_model():
-
+    #Create 2 columns
     col1, col2 = st.columns(2)
-    
     with col1:
         st.selectbox('Select Model Type', options=['Random Forest Classifier', 'Decision Tree Classifier'], key='selected_model', placeholder="Select Model",)
     with col2:
@@ -27,11 +26,15 @@ if "prediction" not in st.session_state:
 
 
 #Initialise model
-@st.cache_resource(show_spinner='Model Loading...')
+@st.cache_resource(show_spinner='Models Loading...')
 def load_model():
 
     #Load model and encoder
-    pipeline = joblib.load('models/finished_model.joblib')
+    if st.session_state['selected_model'] == 'Random Forest Classifier':
+        pipeline = joblib.load('models/finished_model.joblib')
+    else:
+        pipeline = joblib.load('models/finished_model.joblib')      
+
     encoder  = joblib.load('models/encoder.joblib')
 
     return pipeline, encoder
@@ -70,6 +73,9 @@ def predict_attrition(pipeline, encoder):
     #Store the value in the session state
     st.session_state['prediction'] = prediction
 
+    selected_model = st.write(st.session_state['selected_model'])
+
+    return selected_model
 
 
 if __name__ == '__main__':
@@ -100,7 +106,6 @@ if __name__ == '__main__':
             st.number_input('Enter the number of education years', key='education', min_value=1, step=1)
             st.selectbox('Enter what field of Education you have', options=['Life Sciences', 'Other', 'Medical', 'Marketing','Technical Degree','Human Resources'], key='education_field')
             st.number_input('How many companies have you worked for', max_value=20, step=1, key='number_of_companies_worked')
-           
 
         with col3:
             st.write('### Satifaction Index 😍')
@@ -108,15 +113,15 @@ if __name__ == '__main__':
             st.number_input('Rate your job satisfaction', max_value=5, step=1, key='job_satisfaction')
             st.number_input('Rate your work-life balance', max_value=5, step=1, key='work_life_balance')
             st.number_input('How many years have you worked in this company', key='years_at_company', min_value=1, step=1)
+
             
         #Add a submit button to perform the prediction
+        # st.write(st.session_state['selected_model'])
+            
         st.form_submit_button('## **Predict**', type='primary', use_container_width=False, on_click=predict_attrition, kwargs=dict(pipeline=pipeline, encoder=encoder))
 
 
-
-
 final_prediction = st.session_state["prediction"]
-
 if not final_prediction:
     st.write("### Predictions show here ⬇️")
     st.divider()
@@ -124,7 +129,8 @@ elif final_prediction == "Yes":
     st.markdown("### Prediction → Employee will leave the company")
     st.divider()
 else:
+    st.write(st.session_state['selected_model'])
     st.markdown("### **Prediction** → Employee will not leave the company")
     st.divider()
 
-# st.write(st.session_state)
+st.write(st.session_state)

@@ -72,4 +72,4 @@ with col2:
     st.link_button('Medium', url='https://medium.com/coderacheal')
 
 
-# st.write(st.session_state())
+st.write(st.session_state())
