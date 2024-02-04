@@ -73,12 +73,17 @@ def predict_attrition(pipeline, encoder):
     pred = pipeline.predict(df)
     pred = int(pred[0])
 
+    classes_order = pipeline.classes_
+
     #Decode the prediction
     prediction = encoder.inverse_transform([pred])
 
     #Store the value in the session state
     st.session_state['prediction'] = prediction
     st.session_state['pred_proba'] = pred_proba
+    st.session_state['classes_order'] = classes_order
+
+    #Push df into a database
 
     return pred_proba, prediction
 
@@ -107,7 +112,7 @@ else:
                 st.number_input('Enter your age', key='age', max_value=60, step=1)
                 marital_status = st.selectbox('Select your marital status', options=['Single', 'Married', 'Divorced'], key='marital_status')
                 st.number_input('What is you distance from home', key='distance_from_home', max_value=25)
-                st.number_input('Enter your salary per year', key='monthly_income', min_value=10000, step=1000)
+                st.number_input('Enter your salary per month', key='monthly_income', min_value=1000, step=100)
 
             with col2:
                 st.write('### Work Info 💼')
@@ -124,12 +129,7 @@ else:
                 st.number_input('How many years have you worked in this company', key='years_at_company', min_value=1, step=1)
 
                 
-            #Add a submit button to perform the prediction
-            # st.write(st.session_state['selected_model'])
-                
             st.form_submit_button('## **Predict**', type='primary', use_container_width=False, on_click=predict_attrition, kwargs=dict(pipeline=pipeline, encoder=encoder))
-
-    # final_prediction, probabilities = predict_attrition(pipeline, encoder)
 
     final_prediction = st.session_state["prediction"]
     pred_proba = st.session_state["pred_proba"]
@@ -137,11 +137,14 @@ else:
     if not final_prediction:
         st.write("### Predictions show here ⬇️")
         st.divider()
-    elif final_prediction == "Yes":
-        st.markdown(f"### Employee will leave the company 🏃‍♂️💨 with a probaobilty of {pred_proba}")
+    elif final_prediction == 'Yes':
+        probability_of_yes = pred_proba[0][1] * 100
+        st.markdown(f"### Employee will leave 🏃‍♂️ IBM with a {round(probability_of_yes, 2)}% probability.")
         st.divider()
     else:
-        st.markdown("### Employee will not leave the company")
+        probability_of_no = pred_proba[0][0] * 100
+        st.markdown(f"### Employee will stay 🧘‍♂️ at IBM with a {round(probability_of_no, 2)}% probability.")
         st.divider()
+
 
 # st.write(st.session_state)
