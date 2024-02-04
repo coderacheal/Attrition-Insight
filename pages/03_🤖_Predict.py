@@ -8,6 +8,7 @@ import pandas as pd
 st.set_page_config(
     page_title='Prediction',
     layout='wide',
+    page_icon='🤖'
 )
 
 #Choose model
@@ -23,6 +24,10 @@ def select_model():
 # Initialise prediction in the session state
 if "prediction" not in st.session_state:
     st.session_state['prediction'] = None
+
+# Initialise prediction in the session state
+if "pred_proba" not in st.session_state:
+    st.session_state['pred_proba'] = None
 
 
 #Initialise model
@@ -63,7 +68,8 @@ def predict_attrition(pipeline, encoder):
     # create the datafram with the values and column names
     df = pd.DataFrame(data, columns=columns)
 
-    #Make a prediction
+    # Make a prediction and get probabilities
+    pred_proba = pipeline.predict_proba(df)
     pred = pipeline.predict(df)
     pred = int(pred[0])
 
@@ -72,10 +78,9 @@ def predict_attrition(pipeline, encoder):
 
     #Store the value in the session state
     st.session_state['prediction'] = prediction
+    st.session_state['pred_proba'] = pred_proba
 
-    selected_model = st.write(st.session_state['selected_model'])
-
-    return selected_model
+    return pred_proba, prediction
 
 
 # Check if the user is authenticated
@@ -124,17 +129,19 @@ else:
                 
             st.form_submit_button('## **Predict**', type='primary', use_container_width=False, on_click=predict_attrition, kwargs=dict(pipeline=pipeline, encoder=encoder))
 
+    # final_prediction, probabilities = predict_attrition(pipeline, encoder)
 
     final_prediction = st.session_state["prediction"]
+    pred_proba = st.session_state["pred_proba"]
+
     if not final_prediction:
         st.write("### Predictions show here ⬇️")
         st.divider()
     elif final_prediction == "Yes":
-        st.markdown("### Prediction → Employee will leave the company")
+        st.markdown(f"### Employee will leave the company 🏃‍♂️💨 with a probaobilty of {pred_proba}")
         st.divider()
     else:
-        st.write(st.session_state['selected_model'])
-        st.markdown("### **Prediction** → Employee will not leave the company")
+        st.markdown("### Employee will not leave the company")
         st.divider()
 
-    st.write(st.session_state)
+# st.write(st.session_state)

@@ -73,7 +73,6 @@ else:
     st.title('Proprietory Data from IMB 🛢️')
     st.write('')
 
-
     # Additional Code for the Second Page
     col1, col2 = st.columns(2)
     with col1:

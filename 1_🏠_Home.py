@@ -6,14 +6,9 @@ from yaml.loader import SafeLoader
 from utils import column_1, column_2
 
 
-layout = 'centered'
-
-if st.session_state["authentication_status"]:
-    layout='wide'
-
 st.set_page_config(
     page_title='About',
-    layout=layout,
+    layout='wide',
     page_icon='🏠'
 )
 
@@ -28,6 +23,9 @@ authenticator = stauth.Authenticate(
     config['cookie']['expiry_days'],
     config['preauthorized']
 )
+
+# if st.session_state["authentication_status"]:
+#     layout='wide'
 
 name, authentication_status, username = authenticator.login(location='main')
 

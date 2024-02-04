@@ -50,13 +50,14 @@ column_1 = f"""
     ## Attrition Meter
     This app show where or not an employee will leave the company not based on certain determined demographics and job related questions
     ## Key Features
+    - View Data - Allows you to access the data in a remote database via connection
     - Dashboard - Contains Data Visualization
     - Predict - Allows you to view prediction in real time
     ## User Benefits
     - Make data-driven decisions effortlessly.
     - Harness the power of machine learning without the complexity.
     ## Live Demo
-    [Watch Demo Video](link) or [Get Started Now](link)
+    [Watch Demo Video](link)
    
 """
 
@@ -64,9 +65,8 @@ column_2 = """
     ## Machine Learning Integration
     - You have access to select between 2 models for prediction
     - Simple integration and user-friendly interface.
-    ## Advanced Features
-    - Customization options for model parameters.
-    - Real-time predictions for up-to-the-minute insights.
+    - Save data to a database for future use
+    - Get probability of predictions
     ## Need Help?
     Contact me at  hello@rachealappiahkubi.com for collaborations
     © 2024. All rights reserved.
