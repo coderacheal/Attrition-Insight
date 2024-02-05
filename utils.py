@@ -61,7 +61,7 @@ column_1 = f"""
    
 """
 
-column_2 = """
+column_2 = f"""
     ## Machine Learning Integration
     - You have access to select between 2 models for prediction
     - Simple integration and user-friendly interface.
@@ -70,6 +70,5 @@ column_2 = """
     ## Need Help?
     Contact me at  hello@rachealappiahkubi.com for collaborations
     © 2024. All rights reserved.
-    ## Socials
     """
 

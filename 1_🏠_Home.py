@@ -24,10 +24,8 @@ authenticator = stauth.Authenticate(
     config['preauthorized']
 )
 
-# if st.session_state["authentication_status"]:
-#     layout='wide'
 
-name, authentication_status, username = authenticator.login(location='main')
+name, authentication_status, username = authenticator.login(location='sidebar')
 
 if st.session_state["authentication_status"]:
     authenticator.logout(location='sidebar', key='logout-button')
@@ -36,7 +34,15 @@ if st.session_state["authentication_status"]:
     with col1:
         column_1
     with col2:
+        st.write('## How to run application')
+        st.code('''
+        #activate virtual environment
+        env/scripts/activate
+        
+        streamlit run main.py
+        ''')
         column_2
+        
         st.link_button('GitHub', url='https://github.com/coderacheal', type='primary')
         st.link_button('Medium', url='https://medium.com/coderacheal', type='primary')
 elif st.session_state["authentication_status"] is False:

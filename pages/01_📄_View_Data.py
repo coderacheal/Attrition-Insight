@@ -11,9 +11,7 @@ st.set_page_config(
 )
 
 
-#set page title
-st.title('Proprietory Data from IMB 🛢️')
-st.write('')
+
 
 
 # Initialize connection and use st.cache_resource to only run once.
@@ -73,6 +71,10 @@ def select_num_features():
 if not st.session_state.get("authentication_status"):
     st.warning('### Login from the Home page to use app')
 else:
+    #Set page title
+    st.title('Proprietory Data from IMB 🛢️')
+    st.write('')
+
     # Additional Code for the Second Page
     col1, col2 = st.columns(2)
     with col1:
