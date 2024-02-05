@@ -41,7 +41,7 @@ The following describes the columns present in the data.
 
 **TotalCharges** -- *The total amount charged to the customer*
 
-**Churn&& -- *Whether the customer churned or not (Yes or No)*
+**Churn** -- *Whether the customer churned or not (Yes or No)*
 """
 
 

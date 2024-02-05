@@ -60,20 +60,26 @@ def dashboard_visualizations():
 
         st.write('')
 
-        st.markdown("### Attrition Rate")
-        st.write(f"#### {(df['Attrition'].value_counts(normalize=True).get('Yes', 0) * 100):.2f}%")
-
-        st.markdown("### Avg Monthly Income")
-        st.write(f"#### ${df['MonthlyIncome'].mean():.2f}")
-
-        st.markdown("### Data size")
-        st.write(f"#### {df.size}")
+        st.markdown(
+            f"""
+            <div style="background-color: #CCE5FF; border-radius: 10px; width: 80%; margin-top: 20px;" >
+                <h3 style="margin-left: 30px">Quick Stats About Dataset</h3>
+                <hr>
+                <h5 style="margin-left: 30px"> Attrition Rate: {(df['Attrition'].value_counts(normalize=True).get('Yes', 0) * 100):.2f}%.</h5>
+                <hr>
+                <h5 style="margin-left: 30px">Average Monthly Income: ${df['MonthlyIncome'].mean():.2f}</h5>
+                <hr>
+                <h5 style="margin-left: 30px">Data Size: {df.size}</h5>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
 
     with col2:
         # Create grouped bar chart
         barchart = px.bar(df, x='Department', color='Attrition', barmode='group',
                                 color_discrete_map={'Yes': 'pink', 'No': 'skyblue'},
-                                title='Department vs Attrition Count')
+                                title='Attrition By Department')
 
         st.plotly_chart(barchart)
     

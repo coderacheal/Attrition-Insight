@@ -94,5 +94,5 @@ else:
     else:
         pass
 
-    with st.expander(" #### **Expand to learn about features**"):
+    with st.expander("#### Expand to learn about features"):
         st.markdown(feature_descriptions)
