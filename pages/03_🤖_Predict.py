@@ -2,6 +2,7 @@ import streamlit as st
 import joblib
 import numpy as np
 import pandas as pd
+from supabase_py import create_client, Client
 
 
 # Set page configurations
@@ -45,6 +46,34 @@ def load_model():
     return pipeline, encoder
 
 
+@st.cache_resource
+def initialize_supbase_database():
+    url = st.secrets['supabase_url']
+    key = st.secrets['supabase_key']
+    client: Client = create_client(url, key)
+    return client
+
+
+supabase_connection = initialize_supbase_database()
+
+
+@st.cache_resource(ttl=600)
+def save_data_to_table(data):
+    # Perform insert operation
+    response = supabase_connection \
+        .table('attrition-predictions') \
+        .insert(data.to_dict(orient='records'))
+    
+    # Manually execute the insert operation and get the response
+    result = response.execute()
+
+
+@st.cache_data(ttl=600)
+def read_user_input_data():
+    results = supabase_connection.table('attrition-predictions').select('*').execute()
+    return results
+
+
 def predict_attrition(pipeline, encoder):
     age = st.session_state['age']
     marital_status = st.session_state['marital_status']
@@ -84,6 +113,7 @@ def predict_attrition(pipeline, encoder):
     st.session_state['classes_order'] = classes_order
 
     #Push df into a database
+    save_data_to_table(df)
 
     return pred_proba, prediction
 
