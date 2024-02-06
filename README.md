@@ -91,6 +91,9 @@ Features
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+![image](https://github.com/coderacheal/Attrition-Meter/assets/97846040/eb717bf3-d42b-4005-8080-276b69f08167)
+
+
 <!-- GETTING STARTED -->
 
 ## 💻 Getting Started <a name="getting-started"></a>
