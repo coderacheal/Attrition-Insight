@@ -72,7 +72,7 @@ if not st.session_state.get("authentication_status"):
     st.warning('### Login from the Home page to use app')
 else:
     #Set page title
-    st.title('Proprietory Data from IMB 🛢️')
+    st.title('Proprietory Data from Vodafone 🛢️')
     st.write('')
 
     # Additional Code for the Second Page

@@ -1,0 +1,9 @@
+Age,Department,DistanceFromHome,Education,EducationField,EnvironmentSatisfaction,JobSatisfaction,MaritalStatus,MonthlyIncome,NumCompaniesWorked,WorkLifeBalance,YearsAtCompany,Attrition,Prediction_Time
+0,Sales,0,1,Life Sciences,0,0,Single,1000,0,0,1,Yes,2024-02-07
+0,Sales,0,1,Life Sciences,0,0,Single,1000,0,0,1,Yes,2024-02-07
+0,Sales,0,1,Life Sciences,0,0,Single,1000,0,0,1,Yes,2024-02-07
+0,Sales,0,1,Life Sciences,0,0,Single,1000,0,0,1,Yes,2024-02-07
+0,Sales,0,1,Life Sciences,0,0,Single,1000,0,0,1,Yes,2024-02-07
+0,Sales,0,1,Life Sciences,0,0,Single,1000,0,0,1,Yes,2024-02-07
+42,Sales,0,1,Life Sciences,0,0,Single,1000,0,0,1,No,2024-02-09
+42,Research & Development,3,3,Marketing,4,4,Married,5000,3,3,8,No,2024-02-12
