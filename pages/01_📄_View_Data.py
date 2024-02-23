@@ -12,8 +12,6 @@ st.set_page_config(
 
 
 
-
-
 # Initialize connection and use st.cache_resource to only run once.
 @st.cache_resource(show_spinner='Connecting to Database 🗃️...')
 def init_connection():
@@ -27,6 +25,7 @@ def init_connection():
         + ";PWD="
         + st.secrets["password"]
     )
+
 
 
 # Call the connection and store as a variable
