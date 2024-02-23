@@ -72,3 +72,5 @@ column_2 = f"""
     © 2024. All rights reserved.
     """
 
+#Build command
+# mkdir .streamlit; cp /etc/secrets/secrets.toml ./.streamlit/; pip install --upgrade pip && pip install -r requirements.txt
