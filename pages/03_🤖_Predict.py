@@ -13,19 +13,19 @@ st.set_page_config(
 )
 
 
-st.cache_resource(show_spinner='Model Loading')
+st.cache_resource()
 def load_forest_pipeline():
     pipeline = joblib.load('./models/forest_pipeline.joblib')
     return pipeline
 
 
-st.cache_resource(show_spinner='Model Loading')
+st.cache_resource()
 def load_scv_pipeline():
     pipeline = joblib.load('./models/svc_pipeline.joblib')
     return pipeline
 
 
-st.cache_resource()
+st.cache_resource(show_spinner='Models Loading...')
 def select_model():
     col1, col2 = st.columns(2)
 
@@ -42,6 +42,7 @@ def select_model():
     encoder = joblib.load('./models/encoder.joblib')
 
     return pipeline, encoder
+
 
 
 def make_prediction(pipeline, encoder):
@@ -82,7 +83,7 @@ def make_prediction(pipeline, encoder):
     st.session_state['probability'] = probability
 
     #Add Attrition and time of prediction to dataframe
-    df['Attrition'] = prediction
+    df['Predicted Attrition'] = prediction
     df['Prediction_Time'] = datetime.date.today()
 
     #Push df into a history.csv and save DataFrame to a CSV file in append mode
@@ -99,7 +100,6 @@ if 'probability' not in st.session_state:
 def display_form():
     pipeline, encoder = select_model()
 
-
     with st.form('input-feature'):
 
         #Divide form into 3 columns
@@ -115,7 +115,7 @@ def display_form():
         with col2:
             st.write('### Work Info 💼')
             st.selectbox('Select your department', options=['Sales', 'Research & Development', 'Human Resources'], key='department')
-            st.number_input('Enter the number of education years', key='education', min_value=1, step=1)
+            st.number_input('Enter the number of education years', key='education', min_value=1, max_value=5, step=1)
             st.selectbox('Enter what field of Education you have', options=['Life Sciences', 'Other', 'Medical', 'Marketing','Technical Degree','Human Resources'], key='education_field')
             st.number_input('How many companies have you worked for', min_value=1, max_value=20, step=1, key='number_of_companies_worked')
 
@@ -132,10 +132,10 @@ def display_form():
 
 # Check if the user is authenticated
 if not st.session_state.get("authentication_status"):
-    st.warning('### Login from the Home page to use app')
+    st.info('Login from the Home page to use app')
 else:
     if __name__ == "__main__":
-        st.title("Make a Prediction")
+        st.markdown("## Predict Attrition")
         display_form()
 
         final_prediction = st.session_state["prediction"]
@@ -153,33 +153,3 @@ else:
             st.markdown(f"### Employee will stay 🧘‍♂️ at IBM with a {round(probability_of_no, 2)}% probability.")
             st.divider()
 
-#     # st.write(st.session_state)
-
-
-
-
-
-# # Initialise prediction in the session state
-# if "prediction" not in st.session_state:
-#     st.session_state['prediction'] = None
-
-# # Initialise prediction in the session state
-# if "pred_proba" not in st.session_state:
-#     st.session_state['pred_proba'] = None
-
-
-
-
-   
-
-#     if not final_prediction:
-#         st.write("### Predictions show here ⬇️")
-#         st.divider()
-#     elif final_prediction == 'Yes':
-#         probability_of_yes = pred_proba[0][1] * 100
-#         st.markdown(f"### Employee will leave 🏃‍♂️ IBM with a {round(probability_of_yes, 2)}% probability.")
-#         st.divider()
-#     else:
-#         probability_of_no = pred_proba[0][0] * 100
-#         st.markdown(f"### Employee will stay 🧘‍♂️ at IBM with a {round(probability_of_no, 2)}% probability.")
-#         st.divider()

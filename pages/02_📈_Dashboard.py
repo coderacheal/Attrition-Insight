@@ -15,7 +15,7 @@ df = pd.read_csv('./data/attrition_data_ibm.csv')
 
 def eda_visualizations():
 
-    st.title('Exploratory Data Analysis')
+    st.markdown('### Exploratory Data Analysis')
     col1, col2 = st.columns(2)
 
     with col1:
@@ -44,7 +44,8 @@ def eda_visualizations():
         correlation_heatmap = px.imshow(df.corr(numeric_only=True),
                                         color_continuous_scale='blues',
                                         labels=dict(color='Correlation'),
-                                        title='Correlation Heatmap', width=800, height=650)
+                                        title='Correlation Heatmap', width=800, height=650
+                                        )
 
         
         st.plotly_chart(boxplot)
@@ -53,7 +54,7 @@ def eda_visualizations():
 
 def dashboard_visualizations():
 
-    st.title('Attrition Dashboard & KPIs')
+    st.markdown('### Attrition Dashboard & KPIs')
     col1, col2 = st.columns(2)
 
     with col1:
@@ -113,7 +114,7 @@ def dashboard_visualizations():
 
 # Check if the user is authenticated
 if not st.session_state.get("authentication_status"):
-    st.warning('### Login from the Home page to use app')
+    st.info('Login from the Home page to use app')
 else:
     
 
@@ -126,6 +127,3 @@ else:
         eda_visualizations()
     else:
         dashboard_visualizations()
-
-
-# st.write(st.session_state)

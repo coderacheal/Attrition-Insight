@@ -2,75 +2,50 @@ import streamlit as st
 
 feature_descriptions = """
 
-The following describes the columns present in the data.
-**Gender** Whether the customer is a male or a female*
+1. **Age**: Age of employee
+2. **Attrition**: Employee attrition status
+3. **Department**: Department of work
+4. **DistanceFromHome**: what is their distance from hime
+5. **Education**: 1-Below College; 2- College; 3-Bachelor; 4-Master; 5-Doctor;
+6. **EducationField**: The field they studies in in the University
+7. **EnvironmentSatisfaction**: 1-Low; 2-Medium; 3-High; 4-Very High;
+8. **JobSatisfaction**: 1-Low; 2-Medium; 3-High; 4-Very High;
+9. **MaritalStatus**: Whether they are married, single or divorced
+10. **MonthlyIncome**: How much an employee makes a month
+11. **NumCompaniesWorked**: Number of companies worked prior to IBM
+12. **WorkLifeBalance**: 1-Bad; 2-Good; 3-Better; 4-Best;
+13. **YearsAtCompany**: Current years of service in IBM
 
-**SeniorCitizen** -- *Whether a customer is a senior citizen or not*
-
-**Partner** -- *Whether the customer has a partner or not (Yes, No)*
-
-**Dependents** -- *Whether the customer has dependents or not (Yes, No)*
-
-**Tenure** -- *Number of months the customer has stayed with the company*
-
-**Phone Service** -- *Whether the customer has a phone service or not (Yes, No)*
-
-**MultipleLines** -- *Whether the customer has multiple lines or not*
-
-**InternetService** -- *Customer's internet service provider (DSL, Fiber Optic, No)*
-
-**OnlineSecurity** -- *Whether the customer has online security or not (Yes, No, No Internet)*
-
-**OnlineBackup** -- *Whether the customer has online backup or not (Yes, No, No Internet)*
-
-**DeviceProtection** -- *Whether the customer has device protection or not (Yes, No, No internet service)*
-
-**TechSupport** -- *Whether the customer has tech support or not (Yes, No, No internet)*
-
-**StreamingTV** -- *Whether the customer has streaming TV or not (Yes, No, No internet service)*
-
-**StreamingMovies** -- *Whether the customer has streaming movies or not (Yes, No, No Internet service)*
-
-**Contract** -- *The contract term of the customer (Month-to-Month, One year, Two year)*
-
-**PaperlessBilling** -- *Whether the customer has paperless billing or not (Yes, No)*
-
-**Payment Method** -- *The customer's payment method (Electronic check, mailed check, Bank transfer(automatic), Credit card(automatic))*
-
-**MonthlyCharges** -- *The amount charged to the customer monthly*
-
-**TotalCharges** -- *The total amount charged to the customer*
-
-**Churn** -- *Whether the customer churned or not (Yes or No)*
 """
 
+column_1 = """
+### Attrition Meter
+This app predicts whether an employee is likely to leave the company based on various demographic and job-related factors.
 
+### Key Features
+- **View Data:** Access proprietory data from IBM.
+- **Dashboard:** Explore interactive data visualizations for insights.
+- **Real-time Prediction:** Instantly see predictions for employee attrition.
+- **History:** See past predictions made.
 
-column_1 = f"""
-    ## Attrition Meter
-    This app show where or not an employee will leave the company not based on certain determined demographics and job related questions
-    ## Key Features
-    - View Data - Allows you to access the data in a remote database via connection
-    - Dashboard - Contains Data Visualization
-    - Predict - Allows you to view prediction in real time
-    ## User Benefits
-    - Make data-driven decisions effortlessly.
-    - Harness the power of machine learning without the complexity.
-    ## Live Demo
-    [Watch Demo Video](link)
-   
+### User Benefits
+- **Data-driven Decisions:** Make informed decisions backed by data analytics.
+- **Easy Machine Learning:** Utilize powerful machine learning algorithms effortlessly.
+- **Live Demo:** Watch a demo video to see the app in action.
+
+[Watch Demo Video](link)
 """
 
-column_2 = f"""
-    ## Machine Learning Integration
-    - You have access to select between 2 models for prediction
-    - Simple integration and user-friendly interface.
-    - Save data to a database for future use
-    - Get probability of predictions
-    ## Need Help?
-    Contact me at  hello@rachealappiahkubi.com for collaborations
-    © 2024. All rights reserved.
-    """
+column_2 = """
+### Machine Learning Integration
+- **Model Selection:** Choose between two advanced models for accurate predictions.
+- **Seamless Integration:** Integrate predictions into your workflow with a user-friendly interface.
+- **Probability Estimates:** Gain insights into the likelihood of predicted outcomes.
+
+### Need Help?
+For collaborations contact me at [hello@rachealappiahkubi.com](mailto:hello@rachealappiahkubi.com).
+"""
+
 
 #Build command
 # mkdir .streamlit; cp /etc/secrets/secrets.toml ./.streamlit/; pip install --upgrade pip && pip install -r requirements.txt

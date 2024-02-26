@@ -8,16 +8,22 @@ st.set_page_config(
     layout='wide',
 )
 
-st.title('Prediction History ')
 
-# Check if history CSV file exists
-csv_path = './data/history.csv'
-csv_exists = os.path.exists(csv_path)
-
-if csv_exists:
-    # Read and display the DataFrame
-    history = pd.read_csv(csv_path)
-    st.dataframe(history)
+# Check if the user is authenticated
+if not st.session_state.get("authentication_status"):
+    st.info('Login from the Home page to use app')
 else:
-    # Display a friendly message
-    st.info("No prediction history available yet. Make predictions to populate the history.")
+    st.title('Prediction History ')
+
+    # Check if history CSV file exists
+    csv_path = './data/history.csv'
+
+    csv_exists = os.path.exists(csv_path)
+
+    if csv_exists:
+        # Read and display the DataFrame
+        history = pd.read_csv(csv_path)
+        st.dataframe(history, height=500)
+    else:
+        # Display a friendly message
+        st.info("No prediction history available yet. Make predictions to populate the history.")
