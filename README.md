@@ -93,7 +93,8 @@ Features
 
 ![image](https://github.com/coderacheal/Attrition-Meter/assets/97846040/eb717bf3-d42b-4005-8080-276b69f08167)
 
-![image](https://github.com/coderacheal/Attrition-Meter/assets/97846040/3daeb818-b01a-4323-a297-314b66a7cb3e)
+![image](https://github.com/coderacheal/Attrition-Insight/assets/97846040/a0f9bf95-b847-4a9b-963b-8d875a0b0fc1)
+
 
 
 
