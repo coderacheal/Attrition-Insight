@@ -1,7 +1,7 @@
 <a name="readme-top"></a>
 
 <div align="center">
-  <h1><b>Attrition Meter</b></h1>
+  <h1><b>Attrition Insight</b></h1>
 </div>
 
 <!-- TABLE OF CONTENTS -->
@@ -9,7 +9,7 @@
 # 📗 Table of Contents
 
 - [📗 Table of Contents](#-table-of-contents)
-- [Attrition Meter ](#attrition-meter-)
+- [Attrition Insight ](#attrition-insight-)
   - [🛠 Built With ](#-built-with-)
     - [Tech Stack ](#tech-stack-)
   - [Key Features ](#key-features-)
@@ -27,9 +27,9 @@
 
 <!-- PROJECT DESCRIPTION -->
 
-# Attrition Meter <a name="about-project"></a>
+# Attrition Insight <a name="about-project"></a>
 
-**Attrition Meter** is a data application that allows users to interact with a machine learning model, view data visualizations on the data and see the values of their input saved for future use.
+**Attrition Insight** is a data application that allows users to interact with a machine learning model, view data visualizations on the data and see the values of their input saved for future use. It predicts the likelihood of an employee leaving the company based on various demographic and job-related factors.
 
 Features
 1. **Age**: Age of employee
