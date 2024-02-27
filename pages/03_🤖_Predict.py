@@ -82,8 +82,15 @@ def make_prediction(pipeline, encoder):
     st.session_state['prediction'] = prediction
     st.session_state['probability'] = probability
 
-    #Add Attrition and time of prediction to dataframe
     df['Predicted Attrition'] = prediction
+    df['Model Used'] = st.session_state['selected_model']
+
+    if prediction == 'Yes':
+        df['Probability'] = f'{round(probability[0][1] * 100, 2)}%'
+    else:
+        df['Probability'] = f'{round(probability[0][0] * 100, 2)}%'
+
+    #Add Attrition and time of prediction to dataframe
     df['Prediction_Time'] = datetime.date.today()
 
     #Push df into a history.csv and save DataFrame to a CSV file in append mode
@@ -103,24 +110,22 @@ def display_form():
     with st.form('input-feature'):
 
         #Divide form into 3 columns
-        col1, col2, col3 = st.columns(3)
+        col1, col2 = st.columns(2)
 
         with col1:
-            st.write('### Personal Info 👩🏿')
+            st.write('#### Personal Info 👩🏿')
             st.number_input('Enter your age', key='age', min_value=18, max_value=60, step=1)
             st.selectbox('Select your marital status', options=['Single', 'Married', 'Divorced'], key='marital_status')
             st.number_input('What is you distance from home', key='distancefromhome', max_value=25, min_value=1)
             st.number_input('Enter your salary per month', key='monthly_income', min_value=1000, step=100)
+            st.number_input('Enter your education in years: (1-High School, 2- College, 3-Bachelor, 4-Master, 5-PhD)', key='education', min_value=1, max_value=5, step=1)
+            st.number_input('How many companies have you worked for?', min_value=1, max_value=20, step=1, key='number_of_companies_worked')
 
         with col2:
-            st.write('### Work Info 💼')
+            st.write('#### Work Info 💼')
             st.selectbox('Select your department', options=['Sales', 'Research & Development', 'Human Resources'], key='department')
-            st.number_input('Enter the number of education years', key='education', min_value=1, max_value=5, step=1)
             st.selectbox('Enter what field of Education you have', options=['Life Sciences', 'Other', 'Medical', 'Marketing','Technical Degree','Human Resources'], key='education_field')
-            st.number_input('How many companies have you worked for', min_value=1, max_value=20, step=1, key='number_of_companies_worked')
-
-        with col3:
-            st.write('### Satifaction Index 😍')
+            
             st.number_input('Rate your satisfaction with the environement', max_value=4, min_value=1, step=1, key='environment_satisfaction')
             st.number_input('Rate your job satisfaction', max_value=4, min_value=1, step=1, key='job_satisfaction')
             st.number_input('Rate your work-life balance', max_value=4, step=1, key='work_life_balance', min_value=1)
@@ -135,7 +140,7 @@ if not st.session_state.get("authentication_status"):
     st.info('Login from the Home page to use app')
 else:
     if __name__ == "__main__":
-        st.markdown("## Predict Attrition")
+        st.markdown("### Predict Attrition")
         display_form()
 
         final_prediction = st.session_state["prediction"]

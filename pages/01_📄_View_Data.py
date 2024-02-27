@@ -38,7 +38,7 @@ if not st.session_state.get("authentication_status"):
     st.info('Login from the Home page to use app')
 else:
     #Set page title
-    st.markdown('### Proprietory Data from Vodafone 🛢️')
+    st.markdown('### Proprietory Data from IBM 🛢️')
 
     with st.expander("Expand to learn about features"):
         st.markdown(feature_descriptions)

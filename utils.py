@@ -19,8 +19,8 @@ feature_descriptions = """
 """
 
 column_1 = """
-### Attrition Meter
-This app predicts whether an employee is likely to leave the company based on various demographic and job-related factors.
+### Attrition Insight
+Attrition Insight is a Machine Learning application that  predicts the likelihood of an employee to leave the company based on various demographic and job-related factors.
 
 ### Key Features
 - **View Data:** Access proprietory data from IBM.
