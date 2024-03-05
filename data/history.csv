@@ -8,3 +8,5 @@ Age,Department,DistanceFromHome,Education,EducationField,EnvironmentSatisfaction
 28,Research & Development,2,4,Technical Degree,3,3,Single,10000,3,3,2,Yes,Random Forest,51.0%,2024-02-27
 28,Research & Development,2,4,Technical Degree,3,3,Single,10000,3,3,4,No,Random Forest,68.0%,2024-02-27
 40,Human Resources,4,2,Marketing,3,4,Single,8000,2,4,4,No,SVC,94.38%,2024-02-27
+50,Sales,1,1,Life Sciences,1,1,Single,1000,1,1,1,Yes,Random Forest,61.0%,2024-03-04
+50,Sales,1,1,Life Sciences,1,1,Single,1000,1,1,1,No,SVC,94.69%,2024-03-04

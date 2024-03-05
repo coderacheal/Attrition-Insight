@@ -13,6 +13,7 @@ st.set_page_config(
 )
 
 
+
 st.cache_resource()
 def load_forest_pipeline():
     pipeline = joblib.load('./models/forest_pipeline.joblib')
@@ -105,7 +106,9 @@ if 'probability' not in st.session_state:
 
 
 def display_form():
-    pipeline, encoder = select_model()
+
+    with st.spinner('Models Loading..'):
+        pipeline, encoder = select_model()
 
     with st.form('input-feature'):
 
