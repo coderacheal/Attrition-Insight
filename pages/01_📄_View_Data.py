@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+import pyodbc
 from utils import feature_descriptions
 
 # Set page configurations
@@ -9,40 +10,69 @@ st.set_page_config(
     page_icon='📄'
 )
 
-path = './data/attrition_data_ibm.csv'
+
+# Initialize connection and use st.cache_resource to only run once.
+@st.cache_resource(show_spinner='Connecting to Database 🗃️...')
+def init_connection():
+    return pyodbc.connect(
+        "DRIVER={SQL Server};SERVER="
+        + st.secrets["server"]
+        + ";DATABASE="
+        + st.secrets["database"]
+        + ";UID="
+        + st.secrets["username"]
+        + ";PWD="
+        + st.secrets["password"]
+    )
+
+
+# Call the connection and store as a variable
+conn = init_connection()
+
+
+# Create a function to query the database and cache the results
+@st.cache_data()
+def running_query(query):
+    with conn.cursor() as cur:
+        cur.execute(query)
+        rows = cur.fetchall()
+        df = pd.DataFrame.from_records(rows, columns=[column[0] for column in cur.description])
+        return df
+
 
 @st.cache_data()
 def select_all_features():
-    df = pd.read_csv(path)
-    data = df.drop('ColumnX', axis=1)
+    data = running_query("SELECT * FROM LP2_Telco_churn_first_3000")
     return data
 
 
 @st.cache_data()
 def select_cat_features():
-    df = pd.read_csv(path)
-    data = df.select_dtypes(include='object')
+    cat_columns = ['customerID', 'gender', 'MultipleLines', 'InternetService',
+                        'OnlineSecurity', 'OnlineBackup', 'DeviceProtection', 'TechSupport',
+                        'StreamingTV', 'StreamingMovies', 'Contract', 'PaymentMethod', 'Churn']
+   
+    data = running_query(f"SELECT {', '.join(cat_columns)} FROM LP2_Telco_churn_first_3000")
     return data
 
 
 @st.cache_data()
 def select_num_features():
-    df = pd.read_csv(path)
-    data = df.select_dtypes(include='number')
-    data = df.drop('ColumnX', axis=1)
+    num_columns = ['tenure', 'MonthlyCharges', 'TotalCharges']
+   
+    data = running_query(f"SELECT {', '.join(num_columns)} FROM LP2_Telco_churn_first_3000")
     return data
 
 
 # Check if the user is authenticated
 if not st.session_state.get("authentication_status"):
-    st.info('Login from the Home page to use app')
+    st.warning('### Login from the Home page to use app')
 else:
     #Set page title
-    st.markdown('### Proprietory Data from IBM 🛢️')
+    st.title('Proprietory Data from Vodafone 🛢️')
 
     with st.expander("Expand to learn about features"):
         st.markdown(feature_descriptions)
-
 
     # Additional Code for the Second Page
     col1, col2 = st.columns(2)
@@ -63,4 +93,6 @@ else:
     else:
         pass
 
-   
+    
+
+

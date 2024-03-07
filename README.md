@@ -110,7 +110,7 @@ To get a local copy up and running, follow these steps.
 In order to run this project you need:
 
 - Python
-- Streamlit
+
 
 ### Setup
 
@@ -140,7 +140,7 @@ python -m venv env
 Activate the virtual environment
 
 ```sh
-    virtual_env/Scripts/activate
+    env/Scripts/activate
 ```
 
 
@@ -164,7 +164,7 @@ To run the project, execute the following command:
 ```
 
 - A webpage opens up to view the app
-- Login to the app with `username=coderacheal` and `password:abc`
+- Login to the app with `username=coderacheal` and `password:123456`
 - Finally test a prediction by clicking on the predicitons page
 - **Note**: Users may not be able to access the View Data page as the secrets file is not checked into git
 
