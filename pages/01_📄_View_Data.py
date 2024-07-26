@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 from utils import feature_descriptions
 
+
 # Set page configurations
 st.set_page_config(
     page_title='View Data',

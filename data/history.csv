@@ -10,3 +10,6 @@ Age,Department,DistanceFromHome,Education,EducationField,EnvironmentSatisfaction
 40,Human Resources,4,2,Marketing,3,4,Single,8000,2,4,4,No,SVC,94.38%,2024-02-27
 50,Sales,1,1,Life Sciences,1,1,Single,1000,1,1,1,Yes,Random Forest,61.0%,2024-03-04
 50,Sales,1,1,Life Sciences,1,1,Single,1000,1,1,1,No,SVC,94.69%,2024-03-04
+18,Sales,1,1,Life Sciences,1,1,Single,1000,1,1,1,Yes,Random Forest,60.0%,2024-03-11
+35,Research & Development,3,3,Marketing,4,4,Married,10000,3,4,10,No,Random Forest,87.0%,2024-05-28
+35,Research & Development,3,3,Marketing,4,4,Married,10000,3,4,10,No,SVC,98.27%,2024-05-28

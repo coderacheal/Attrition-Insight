@@ -11,6 +11,7 @@ st.set_page_config(
     page_icon='📈'
 )
 
+
 df = pd.read_csv('./data/attrition_data_ibm.csv')
 
 def eda_visualizations():
@@ -116,7 +117,6 @@ def dashboard_visualizations():
 if not st.session_state.get("authentication_status"):
     st.info('Login from the Home page to use app')
 else:
-    
 
     col1, col2 = st.columns(2)
 
